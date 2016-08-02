@@ -2,14 +2,14 @@
 
 /**
  * @ngdoc overview
- * @name clientApp
+ * @name personalCapitalWebAppApp
  * @description
- * # clientApp
+ * # personalCapitalWebAppApp
  *
  * Main module of the application.
  */
 angular
-  .module('clientApp', [
+  .module('personalCapitalWebAppApp', [
     'ngAnimate',
     'ngAria',
     'ngCookies',
@@ -24,11 +24,6 @@ angular
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
         controllerAs: 'main'
-      })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
-        controllerAs: 'about'
       })
       .otherwise({
         redirectTo: '/'

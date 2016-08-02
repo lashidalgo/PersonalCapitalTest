@@ -1,6 +1,11 @@
+$icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
 // bower:scss
+@import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 // endbower
-
+/* Brand colors */
+$purple: #aa1f77;
+$white: #fff;
+/*Site layout*/
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -14,7 +19,6 @@ body {
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
-.marketing,
 .footer {
   padding-left: 15px;
   padding-right: 15px;
@@ -37,31 +41,83 @@ body {
 /* Custom page footer */
 .footer {
   padding-top: 19px;
-  color: #777;
+  color: #000;
   border-top: 1px solid #e5e5e5;
 }
 
 .container-narrow > hr {
   margin: 30px 0;
 }
-
-/* Main marketing message and sign up button */
-.jumbotron {
-  text-align: center;
-  border-bottom: 1px solid #e5e5e5;
-
-  .btn {
-    font-size: 21px;
-    padding: 14px 24px;
-  }
+/* Brand colors */
+.purpleBackground{
+  background-color: $purple;
+  color: $white;
+}
+.purple{
+  color: $purple; 
 }
 
-/* Supporting marketing content */
-.marketing {
-  margin: 40px 0;
+/* Utils */
+.noBorder{
+  border: none;
+}
 
-  p + h4 {
-    margin-top: 28px;
+.colorWhite{
+  color: $white!important;
+}
+
+/* Search page */
+
+.searchContainer{
+  min-height: 600px;
+}
+
+.focusLayout{
+  z-index: -1;
+  height: auto;
+  display: block;
+  opacity: 0.3;
+  position: absolute;
+  width: 100%;
+  background-color: #000;
+  top: 0;
+  left: 0;
+}
+
+#results{
+  padding-bottom: 0px;
+  z-index: 2;
+  background-color: $white;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  border: 1px solid #ddd;
+  border-top: 0px;
+  border-left
+  .name{
+    margin-bottom: 0px;
+  }
+  .url{
+    font-size: 12px;
+    color: $purple;
+    border-bottom: 1px solid #ddd;
+  }
+  #result{
+    margin-top: -10px;
+    padding:10px;
+    padding-bottom: 0px;
+  }
+  #result:hover{
+    cursor: pointer;
+    background-color: #f7f7f7;
+  }
+  #result:first-child p:first-child{
+    padding-top: 10px;
+    margin-top: 0px;
+  }
+  #result:last-child p:last-child{
+    border-bottom: none;
+    margin-bottom: 4px;
   }
 }
 
@@ -81,9 +137,5 @@ body {
   /* Space out the masthead */
   .header {
     margin-bottom: 30px;
-  }
-  /* Remove the bottom border on the jumbotron for visual effect */
-  .jumbotron {
-    border-bottom: 0;
   }
 }
