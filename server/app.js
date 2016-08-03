@@ -6,8 +6,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
-
 var app = express();
 
 // uncomment after placing your favicon in /public
@@ -18,15 +16,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 /**
- * Dev
+ * Development Settings
  */
 if (app.get('env') === 'development') {
-    // This will change in production since we'll be using the dist folder so we only worry about deploying the server folder
+    // This will change in production since we'll be using the dist folder
     app.use(express.static(path.join(__dirname, '../client')));
-    // Serving up the index page
+    // This covers serving up the index page
     app.use(express.static(path.join(__dirname, '../client/.tmp')));
     app.use(express.static(path.join(__dirname, '../client/app')));
-    // Error Handler
+
+    // Error Handling
     app.use(function(err, req, res, next) {
         res.status(err.status || 500);
         res.render('error', {
@@ -37,13 +36,14 @@ if (app.get('env') === 'development') {
 }
 
 /**
- * Production
+ * Production Settings
  */
 if (app.get('env') === 'production') {
-    // Yeoman will put the optimized files under dist
+
+    // changes it to use the optimized version for production
     app.use(express.static(path.join(__dirname, '/dist')));
-    // Error handler
-    // no stacktraces shown to user
+    // production error handler
+    // no stacktraces leaked to user
     app.use(function(err, req, res, next) {
         res.status(err.status || 500);
         res.render('error', {
@@ -53,5 +53,5 @@ if (app.get('env') === 'production') {
     });
 }
 
-
+app.use('/', routes);
 module.exports = app;

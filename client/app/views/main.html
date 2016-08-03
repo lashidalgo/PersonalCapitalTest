@@ -1,16 +1,17 @@
 <div class="container-fluid searchContainer">
   <div class="row">
-    <div class="col-md-8 col-md-offset-2">
+    <div class="col-md-12">
       <div class="form-group">
         <label for="finantialInstitutionSearch">Search financial institutions</label>
         <div class="input-group">
           <input id="finantialInstitutionSearch" name="finantialInstitutionSearch" type="search" class="form-control" aria-label="search input" ng-model="searchString" ng-change="search()"></input>
           <span class="input-group-addon purpleBackground noBorder"> 
-            <span class="glyphicon glyphicon-search"></span>
+            <span class="glyphicon glyphicon-search" ng-hide="showDelete"></span>
+            <span class="glyphicon glyphicon-remove" ng-show="showDelete" class="pointer" ng-click="cleanSearchString()" aria-label="Clear search"></span>
           </span>
         </div>
-        <div id="results">
-          <div id="result" ng-repeat="result in results">
+        <div id="results" ng-show="showFocusLayout">
+          <div id="result" tabindex="0" ng-repeat="result in results">
             <p class="name">
               {{result.name}}
             </p>
@@ -19,8 +20,11 @@
             </p>
           </div>
         </div>
+        <div class="center marginTop20" ng-hide="showFocusLayout">
+          <img src="../images/sample.png"/>
+        </div>
       </div>
     </div>
   </div>
 </div>
-<div ng-show="showFocusLayout" class="focusLayout" style="height: {{focusLayoutHeight}}; top: {{focusLayoutOffset}}"></div>
+<div ng-show="showFocusLayout" class="focusLayout animate-show" style="height: {{focusLayoutHeight}}; top: {{focusLayoutOffset}}"></div>
