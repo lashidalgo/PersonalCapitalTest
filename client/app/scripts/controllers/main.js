@@ -8,7 +8,7 @@
  * Controller of the personalCapitalWebAppApp
  */
 angular.module('personalCapitalWebAppApp')
-  .controller('MainCtrl', function ($scope) {
+  .controller('MainCtrl', function ($scope, ProductService) {
     
     $scope.searchString = '';
     $scope.showFocusLayout = false;
@@ -16,47 +16,38 @@ angular.module('personalCapitalWebAppApp')
     $scope.focusLayoutOffset = 0;
     $scope.searchContainer = angular.element('.searchContaine');
     $scope.searchInputField = angular.element('#finantialInstitutionSearch');
-    $scope.results = [
-        {
-            'name': 'American Express Cards (US)',
-            'url': 'https://www.americanexpress.com',
-            'type': 'CREDIT_CARD'
-        },
-        {
-            'name': 'Ariel Mutual Funds (US)',
-            'url': 'http://www.arielmutualfunds.com/home.index.htm',
-            'type': 'INVESTMENT'
-        },
-        {
-            'name': 'American Funds (US) - Investments',
-            'url': 'https://www.americanfunds.com',
-            'type': 'INVESTMENT'
-        },
-        {
-            'name': 'Alliance Bernstein (US) - Investments',
-            'url': 'http://www.alliancebernstein.com/investments/us/Home.aspx?nid=5415',
-            'type': 'INVESTMENT'
-        }];
+    $scope.results = [];
+    $scope.showDelete = false;
+
+    //This all search logic could be on a directive, so we can reuse the bar in other parts of the site
+    //For DEV purposes I'll follo KISS pattern and leave it here.
     $scope.search = function(){
     	//Only search if the search string is greater than two
     	if ($scope.searchString.length > 2) {
     		$scope.showFocusLayoutFn(true);
     		//Query API
-    		
-
+    		ProductService.getProductsByQueryString($scope.searchString).then(function(response){
+                $scope.results = response;
+            });
     	}else{
     		$scope.showFocusLayoutFn(false);
+            $scope.results = [];
+            $scope.showDelete = $scope.searchString.length != 0;
     	}
-
     };
 
+    //This function will calculate the focus layout heigh and absolute position 
+    //dinamically based on where the searchbox is
     $scope.showFocusLayoutFn = function(show){
     	$scope.focusLayoutOffset = ($scope.searchInputField.offset().top + $scope.searchInputField.innerHeight()) + 3;
     	$scope.focusLayoutHeight = (angular.element(window).innerHeight() - $scope.focusLayoutOffset) + 'px';
     	$scope.focusLayoutOffset += 'px'; 
     	$scope.showFocusLayout = show;
-    	/*if (show) {
-    		window.innerHeight;
-    	}*/
     };
+
+    $scope.cleanSearchString = function(){
+        $scope.searchString = '';
+        $scope.showFocusLayoutFn(false);
+        $scope.results = [];
+    }
   });
