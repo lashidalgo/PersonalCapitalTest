@@ -8,6 +8,7 @@ This is the test requested by Personal Capital.
 ####Dependencies 
 
 This project runs on Node.js, you need to donwnload it [here](https://nodejs.org/en/).
+To make `SASS` work, you will need to have `Ruby` installed in your machine. If you are using windows or linux you can go [here](https://www.ruby-lang.org/en/downloads/). If you are using Mac congratulations, it comes pre-installed.
 
 Once installed you'll need grunt.
 
@@ -21,7 +22,7 @@ The App is separated in two layers:
 
 To build the front end App go to `client` folder and run:
 
-    `npm install && bower install && sudo gem install compass  && gulp build`
+    `npm install && bower install && sudo gem install compass  && grunt build`
   
 This will build the site and put it on `server/dist`so we serve the application and the API from the same server (for development purposes).
 
