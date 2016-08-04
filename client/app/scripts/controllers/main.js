@@ -49,5 +49,6 @@ angular.module('personalCapitalWebAppApp')
         $scope.searchString = '';
         $scope.showFocusLayoutFn(false);
         $scope.results = [];
+        $scope.showDelete = false;
     }
   });
